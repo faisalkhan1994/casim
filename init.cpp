@@ -171,6 +171,10 @@ BaseCache* BuildCacheBank(Config& config, const string& prefix, g_string& name, 
         assert(isPow2(rpvMax + 1));
         // add your SRRIP construction code here
         rp = new SRRIPReplPolicy(numLines, rpvMax);
+    } else if (replType == "Hawkeye") {
+        uint32_t rpvMax = config.get<uint32_t>(prefix + "repl.rpvMax", 3);
+
+        rp = new HawkeyeReplPolicy(numLines);
     } else if (replType == "WayPart" || replType == "Vantage" || replType == "IdealLRUPart") {
         if (replType == "WayPart" && arrayType != "SetAssoc") panic("WayPart replacement requires SetAssoc array");
 
