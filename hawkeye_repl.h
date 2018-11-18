@@ -14,6 +14,7 @@ class HawkeyeReplPolicy : public ReplPolicy {
 		uint32_t numLines; // number of cache lines
 		bool predVal; // predval used by the hawkeye predictor
 		bool currentAcess;
+	        const uint32_t HashedPC = 13;
 
 	public:
 		explicit HawkeyeReplPolicy(uint32_t _numLines) :numLines(_numLines) {
@@ -57,12 +58,17 @@ class HawkeyeReplPolicy : public ReplPolicy {
 			
 		}
 
-		bool hawkeyePredictor() {
+		bool hawkeyePredictor(const MemReq* req) {
 			/*
 				Cache-friendly = 1
 				Cache-averse = 0
 			*/
-			return predVal;
+			if (/*value of opt gen at that PC*/ > 4) {
+		            return true;
+		          } else {
+		            return false;
+		          }
+			//return predVal;
 		}
 
 		void associateRRIP(bool _predVal, bool _currentAccess) {
