@@ -55,6 +55,7 @@
 #include "ooo_core.h"
 #include "part_repl_policies.h"
 #include "rrip_repl.h"
+#include "hawkeye_repl.h"
 #include "pin_cmd.h"
 #include "prefetcher.h"
 #include "proc_stats.h"
